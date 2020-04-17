@@ -1,4 +1,5 @@
-import by.ignot.checker.triangle.TriangleChecker;
+package by.ignot.checker.triangle;
+
 import org.junit.Assert;
 import org.junit.Test;
 
