@@ -50,7 +50,6 @@ public class TriangleCheckerTest {
         }
     }
 
-
     public static Stream<Arguments> exceptionCaseData(){
         return Stream.of(
                 Arguments.of((Object) new int[]{-1, 3, 2}),
@@ -68,6 +67,25 @@ public class TriangleCheckerTest {
         catch (TriangleException e){
             String expected = "<= 0 values not allowed here";
             Assertions.assertEquals(expected, e.getMessage());
+        }
+    }
+
+    public static Stream<Arguments> transpositionCaseData(){
+        return Stream.of(
+                Arguments.of((Object) new int[]{3, 2, 2}),
+                Arguments.of((Object) new int[]{10, 7, 8}),
+                Arguments.of((Object) new int[]{32, 100, 123})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("transpositionCaseData")
+    public void transpositionCaseTest(int[] sides) {
+        try{
+            Assertions.assertTrue(TriangleChecker.check(sides[0],sides[1],sides[2]));
+        }
+        catch (TriangleException e){
+            Assertions.fail(e.getMessage());
         }
     }
 }
