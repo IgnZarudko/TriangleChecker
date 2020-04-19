@@ -1,22 +1,18 @@
 package by.ignot.checker.triangle;
 
 import by.ignot.checker.exception.TriangleException;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+
 
 import java.util.stream.Stream;
 
+
 public class TriangleCheckerTest {
 
-    @Parameters
-    public static Stream<Arguments> PositiveCaseData(){
+    public static Stream<Arguments> positiveCaseData(){
         return Stream.of(
                 Arguments.of((Object) new int[]{2, 3, 2}),
                 Arguments.of((Object) new int[]{7, 8, 10}),
@@ -25,18 +21,17 @@ public class TriangleCheckerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("PositiveCaseData")
-    public void CheckerPositiveTest(int[] sides) {
+    @MethodSource("positiveCaseData")
+    public void checkerPositiveTest(int[] sides) {
         try{
-            Assert.assertTrue(TriangleChecker.check(sides[0],sides[1],sides[2]));
+            Assertions.assertTrue(TriangleChecker.check(sides[0],sides[1],sides[2]));
         }
         catch (TriangleException e){
             Assertions.fail(e.getMessage());
         }
     }
 
-    @Parameters
-    public static Stream<Arguments> NegativeCaseData(){
+    public static Stream<Arguments> negativeCaseData(){
         return Stream.of(
                 Arguments.of((Object) new int[]{1, 3, 2}),
                 Arguments.of((Object) new int[]{7, 8, 20}),
@@ -45,10 +40,10 @@ public class TriangleCheckerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("NegativeCaseData")
-    public void CheckerNegativeTest(int[] sides) {
+    @MethodSource("negativeCaseData")
+    public void checkerNegativeTest(int[] sides) {
         try{
-            Assert.assertFalse(TriangleChecker.check(sides[0],sides[1],sides[2]));
+            Assertions.assertFalse(TriangleChecker.check(sides[0],sides[1],sides[2]));
         }
         catch (TriangleException e){
             Assertions.fail(e.getMessage());
@@ -56,8 +51,7 @@ public class TriangleCheckerTest {
     }
 
 
-    @Parameters
-    public static Stream<Arguments> ExceptionCaseData(){
+    public static Stream<Arguments> exceptionCaseData(){
         return Stream.of(
                 Arguments.of((Object) new int[]{-1, 3, 2}),
                 Arguments.of((Object) new int[]{7, 8, -20}),
@@ -66,13 +60,14 @@ public class TriangleCheckerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("ExceptionCaseData")
-    public void ExceptionNegativeTest(int[] sides) {
+    @MethodSource("exceptionCaseData")
+    public void exceptionNegativeTest(int[] sides) {
         try{
-            Assert.assertFalse(TriangleChecker.check(sides[0],sides[1],sides[2]));
+            TriangleChecker.check(sides[0],sides[1],sides[2]);
         }
         catch (TriangleException e){
-            Assertions.fail(e.getMessage());
+            String expected = "<= 0 values not allowed here";
+            Assertions.assertEquals(expected, e.getMessage());
         }
     }
 }

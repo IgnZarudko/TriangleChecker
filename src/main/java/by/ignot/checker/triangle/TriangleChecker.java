@@ -8,7 +8,7 @@ public class TriangleChecker {
             return ((a + b > c) && (a + c > b) && (b + c > a));
         }
         else{
-            throw new TriangleException("<= 0 values not allowed here ");
+            throw new TriangleException("<= 0 values not allowed here");
         }
     }
 }
