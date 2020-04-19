@@ -48,11 +48,31 @@ public class TriangleCheckerTest {
     @MethodSource("NegativeCaseData")
     public void CheckerNegativeTest(int[] sides) {
         try{
-            Assert.assertTrue(TriangleChecker.check(sides[0],sides[1],sides[2]));
+            Assert.assertFalse(TriangleChecker.check(sides[0],sides[1],sides[2]));
         }
         catch (TriangleException e){
             Assertions.fail(e.getMessage());
         }
     }
 
+
+    @Parameters
+    public static Stream<Arguments> ExceptionCaseData(){
+        return Stream.of(
+                Arguments.of((Object) new int[]{-1, 3, 2}),
+                Arguments.of((Object) new int[]{7, 8, -20}),
+                Arguments.of((Object) new int[]{130, 0, 100})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("ExceptionCaseData")
+    public void ExceptionNegativeTest(int[] sides) {
+        try{
+            Assert.assertFalse(TriangleChecker.check(sides[0],sides[1],sides[2]));
+        }
+        catch (TriangleException e){
+            Assertions.fail(e.getMessage());
+        }
+    }
 }
