@@ -88,4 +88,58 @@ public class TriangleCheckerTest {
             Assertions.fail(e.getMessage());
         }
     }
+
+    static Stream<Arguments> isoscelesCaseData() {
+        return Stream.of(
+                Arguments.of((Object) new int[]{5, 4, 4}),
+                Arguments.of((Object) new int[]{9, 9, 7}),
+                Arguments.of((Object) new int[]{20, 20, 10})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("isoscelesCaseData")
+    public void triangleCheckTestIsosceles(int[] sides) {
+        try {
+            Assertions.assertTrue(TriangleChecker.check(sides[0], sides[1], sides[2]));
+        } catch (TriangleException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
+
+    static Stream<Arguments> equilateralCaseData() {
+        return Stream.of(
+                Arguments.of((Object) new int[]{3, 3, 3}),
+                Arguments.of((Object) new int[]{11, 11, 11}),
+                Arguments.of((Object) new int[]{1101, 1101, 1101})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("equilateralCaseData")
+    public void triangleCheckTestEquilateral(int[] sides) {
+        try {
+            Assertions.assertTrue(TriangleChecker.check(sides[0], sides[1], sides[2]));
+        } catch (TriangleException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
+
+    static Stream<Arguments> rightCaseData() {
+        return Stream.of(
+                Arguments.of((Object) new int[]{5, 3, 4}),
+                Arguments.of((Object) new int[]{13, 5, 12}),
+                Arguments.of((Object) new int[]{65, 33, 56})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("rightCaseData")
+    public void triangleCheckTestRight(int[] sides) {
+        try {
+            Assertions.assertTrue(TriangleChecker.check(sides[0], sides[1], sides[2]));
+        } catch (TriangleException e) {
+            Assertions.fail(e.getMessage());
+        }
+    }
 }
